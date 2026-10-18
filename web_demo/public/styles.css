@@ -4,3 +4,15 @@
 @media(max-width:850px){.topbar-meta{display:none}.section-grid{grid-template-columns:1fr;padding-top:75px}.hero-aside{max-width:560px}.demo-stage{grid-template-columns:1fr;gap:12px}.flow-connector{flex-direction:row;justify-content:center}.connector-line{width:120px}.connector-label{order:3}.demo-status{align-items:flex-start;flex-direction:column}.progress-wrap{width:100%}.section-heading,.section-heading.compact{display:block}.section-heading-copy,.section-lead{margin-top:25px}.explain-grid{grid-template-columns:1fr}.benefits-section{grid-template-columns:1fr;gap:50px}.cta-content{padding:45px 30px}.cta-grid-mark{right:20px;top:25px;width:110px;height:110px}footer{flex-wrap:wrap}}
 @media(max-width:520px){.topbar{height:64px;padding:0 20px}.section-grid{padding:65px 20px 70px}.hero h1{font-size:54px}.hero-actions{align-items:flex-start;flex-direction:column;gap:18px}.demo-section,.explain-section{padding-left:20px;padding-right:20px}.benefits-section{padding-left:20px;padding-right:20px}.panel-header{padding:0 12px}.panel-caption{padding:12px}.image-tag{font-size:7px}.box-label{font-size:7px}.review-badge{right:8px;bottom:8px}.cta-section{padding:70px 20px}.cta-content{padding:38px 24px}.cta-grid-mark{display:none}footer{padding:24px 20px;display:block}footer p{margin-top:10px}}
 .loop-video-wrap{position:relative;margin:17px 0 14px;border-radius:10px;overflow:hidden;border:1px solid rgba(118,203,226,.32);background:#041b2d;aspect-ratio:16/9}.loop-video{display:block;width:100%;height:100%;object-fit:cover}.loop-caption{position:absolute;bottom:0;left:0;right:0;padding:9px 11px;display:flex;justify-content:space-between;background:linear-gradient(transparent,rgba(4,23,39,.88));font:500 8px 'DM Mono',monospace;letter-spacing:.09em;color:#d4f1f5}
+.panel-quick-actions{display:flex;align-items:center;gap:6px}
+.pill-btn{border:1px solid #c9dbe7;background:#edf5fa;color:var(--ink-2);font:600 10px 'Manrope',sans-serif;padding:5px 9px;border-radius:20px;display:inline-flex;align-items:center;gap:4px;transition:.2s;cursor:pointer}
+.pill-btn:hover{background:var(--blue);color:white;border-color:var(--blue)}
+.hero-actions{flex-wrap:wrap;gap:12px}
+.drag-over{border:2px dashed var(--cyan) !important;box-shadow:0 0 20px rgba(27,194,233,.35)}
+@media(max-width:600px){
+  .hero-actions{width:100%}
+  .primary-button,.secondary-button{width:100%;justify-content:center;padding:14px 18px}
+  .panel-header{gap:6px}
+  .pill-btn{padding:4px 7px;font-size:9px}
+  .detection-box .box-label{font-size:7.5px;padding:3px 5px;top:-20px}
+}

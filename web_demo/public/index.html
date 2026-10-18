@@ -26,8 +26,10 @@
           <div class="hero-actions">
             <button id="detectButton" class="primary-button" type="button"><span class="button-icon">✦</span> Detect pothole</button>
             <input type="file" id="imageUpload" accept="image/*" style="display:none;" />
-            <button id="uploadButton" class="secondary-button" type="button"><span class="button-icon">↑</span> Upload road image</button>
-            <a class="text-link" href="#how-it-works">How it works <span>↓</span></a>
+            <input type="file" id="cameraUpload" accept="image/*" capture="environment" style="display:none;" />
+            <button id="uploadButton" class="secondary-button" type="button"><span class="button-icon">📁</span> Upload image</button>
+            <button id="cameraButton" class="secondary-button" type="button"><span class="button-icon">📷</span> Camera</button>
+            <a class="text-link" href="#demo">Try Demo <span>↓</span></a>
           </div>
           <div class="hero-note"><span class="note-icon">i</span><span>This is a prototype review output. A human inspector remains in control.</span></div>
         </div>
@@ -52,8 +54,15 @@
         </div>
 
         <div class="demo-stage">
-          <div class="image-panel input-panel">
-            <div class="panel-header"><span class="panel-kicker"><b class="step-number">01</b> INPUT FRAME</span><span class="panel-state neutral" id="inputState">Waiting</span></div>
+          <div class="image-panel input-panel" id="dropArea">
+            <div class="panel-header">
+              <span class="panel-kicker"><b class="step-number">01</b> INPUT FRAME</span>
+              <div class="panel-quick-actions">
+                <button type="button" id="stageUploadBtn" class="pill-btn">📁 Upload</button>
+                <button type="button" id="stageCameraBtn" class="pill-btn">📷 Camera</button>
+              </div>
+              <span class="panel-state neutral" id="inputState">Waiting</span>
+            </div>
             <div class="image-wrap">
               <img id="inputImg" src="/pothole.jpg" alt="Real road surface with a visible pothole" />
               <div class="image-vignette"></div>

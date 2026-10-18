@@ -158,18 +158,60 @@ function showResult(apiResult) {
   detectButton.innerHTML = '<span class="button-icon">↻</span> Run again';
 }
 
+function handleSelectedFile(file) {
+  if (!file) return;
+  currentCustomFile = file;
+  const objectUrl = URL.createObjectURL(file);
+  inputImg.src = objectUrl;
+  outputImg.src = objectUrl;
+  inputTag.textContent = file.name ? file.name.slice(0, 18) : 'CAMERA CAPTURE';
+  resetDemo();
+  document.getElementById('demo').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// Mobile and desktop input listeners
+const cameraUpload = document.getElementById('cameraUpload');
+const cameraButton = document.getElementById('cameraButton');
+const stageUploadBtn = document.getElementById('stageUploadBtn');
+const stageCameraBtn = document.getElementById('stageCameraBtn');
+const dropArea = document.getElementById('dropArea');
+
 if (uploadButton && imageUpload) {
   uploadButton.addEventListener('click', () => imageUpload.click());
-  imageUpload.addEventListener('change', (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      currentCustomFile = file;
-      const objectUrl = URL.createObjectURL(file);
-      inputImg.src = objectUrl;
-      outputImg.src = objectUrl;
-      inputTag.textContent = `UPLOAD / ${file.name.slice(0, 18)}`;
-      resetDemo();
-      document.getElementById('demo').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  imageUpload.addEventListener('change', (e) => handleSelectedFile(e.target.files[0]));
+}
+
+if (cameraButton && cameraUpload) {
+  cameraButton.addEventListener('click', () => cameraUpload.click());
+  cameraUpload.addEventListener('change', (e) => handleSelectedFile(e.target.files[0]));
+}
+
+if (stageUploadBtn && imageUpload) {
+  stageUploadBtn.addEventListener('click', () => imageUpload.click());
+}
+
+if (stageCameraBtn && cameraUpload) {
+  stageCameraBtn.addEventListener('click', () => cameraUpload.click());
+}
+
+// Drag and drop for desktop
+if (dropArea) {
+  ['dragenter', 'dragover'].forEach(name => {
+    dropArea.addEventListener(name, (e) => {
+      e.preventDefault();
+      dropArea.classList.add('drag-over');
+    });
+  });
+  ['dragleave', 'drop'].forEach(name => {
+    dropArea.addEventListener(name, (e) => {
+      e.preventDefault();
+      dropArea.classList.remove('drag-over');
+    });
+  });
+  dropArea.addEventListener('drop', (e) => {
+    const dt = e.dataTransfer;
+    if (dt && dt.files && dt.files.length > 0) {
+      handleSelectedFile(dt.files[0]);
     }
   });
 }
@@ -181,3 +223,4 @@ runAgainButton.addEventListener('click', () => {
 });
 
 resetDemo();
+
