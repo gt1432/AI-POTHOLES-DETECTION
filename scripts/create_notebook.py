@@ -137,6 +137,7 @@ md("## 11. Report interpretation and next steps\n\nUse mAP50, mAP50-95, precisio
 
 nb['cells'] = cells
 nb['metadata'] = {'kernelspec': {'display_name': 'Python 3', 'language': 'python', 'name': 'python3'}, 'language_info': {'name': 'python', 'version': '3.10'}}
-out = Path('/home/ubuntu/AI_Potholes_Detection/notebooks/AI_Potholes_Detection.ipynb')
+out = Path(__file__).resolve().parent.parent / 'notebooks' / 'ROADGUARD.ipynb'
+out.parent.mkdir(parents=True, exist_ok=True)
 out.write_text(nbf.writes(nb), encoding='utf-8')
 print(out)

@@ -52,22 +52,26 @@ The repository is intentionally split into two connected deliverables:
 
 The detection-loop image is a visual prototype output for demonstrating the product flow. It does not claim a measured benchmark result. The notebook is the source of truth for training and evaluation metrics after the user runs it on the selected dataset.
 
-## Run the notebook on Linux
+## Run the notebook (Linux, Windows, or Colab)
 
 ### 1. Clone and enter the repository
 
 ```bash
-git clone https://github.com/<your-username>/RoadGuard-AI-Pothole-Detection.git
-cd RoadGuard-AI-Pothole-Detection
+git clone https://github.com/gt1432/AI-POTHOLES-DETECTION.git
+cd AI-POTHOLES-DETECTION
 ```
 
 ### 2. Create a virtual environment
 
 ```bash
-python3 -m venv .venv
+python -m venv .venv
+# On Linux/macOS:
 source .venv/bin/activate
+# On Windows:
+.venv\Scripts\activate
+
 python -m pip install --upgrade pip
-pip install -r requirements.txt
+pip install -r requirements-full-training.txt
 ```
 
 ### 3. Prepare the dataset
@@ -78,15 +82,13 @@ The default pipeline downloads the official RDD2022 India archive and converts i
 python scripts/prepare_rdd2022.py --root data
 ```
 
-Do not commit the downloaded dataset, model weights, or generated training runs unless the applicable dataset and model licenses explicitly permit redistribution. The repository includes the preparation script, instructions, and attribution instead.
-
 ### 4. Open JupyterLab
 
 ```bash
 jupyter lab
 ```
 
-Open `notebooks/AI_Potholes_Detection.ipynb` and run the cells in order. The notebook automatically uses CUDA when available; otherwise it falls back to CPU. For a first experiment, keep `EPOCHS` at 30. For a final experiment, use a larger value only after confirming that the dataset and compute environment are ready.
+Open `notebooks/ROADGUARD.ipynb` and run the cells in order. The notebook automatically uses CUDA when available; otherwise it falls back to CPU.
 
 ### 5. Expected outputs
 
@@ -98,35 +100,55 @@ runs/pothole_yolo/                    # training charts and validation outputs
 runs/predict/                         # annotated prediction images
 ```
 
-The notebook records validation metrics such as precision, recall, mAP50, and mAP50-95. Do not copy numbers into a presentation until the notebook has been run and the results have been checked on a held-out sample.
+## Cloud Deployment on Render
 
-## Use the RoadGuard browser demo locally
+This repository includes a production-ready FastAPI backend (`app.py`), full web demo interface (`web_demo/public`), and automatic Render configuration (`render.yaml` Blueprint and `Procfile`).
 
-The complete demo source is in `web_demo/`. It is a static Node.js site with no database and no external application API.
+### Option A: 1-Click Render Blueprint (Recommended)
+1. In your Render Dashboard, click **New +** -> **Blueprint**.
+2. Connect your repository: `https://github.com/gt1432/AI-POTHOLES-DETECTION`.
+3. Render automatically reads `render.yaml`, configures the build and start commands, and provisions the web service.
 
+### Option B: Manual Web Service on Render
+1. In Render Dashboard, click **New +** -> **Web Service**.
+2. Connect `https://github.com/gt1432/AI-POTHOLES-DETECTION`.
+3. Configure the following settings:
+   - **Environment**: `Python`
+   - **Build Command**: `pip install -r requirements.txt`
+   - **Start Command**: `uvicorn app:app --host 0.0.0.0 --port $PORT`
+   - **Health Check Path**: `/health`
+4. Click **Deploy Web Service**.
+
+Once deployed, your service URL will be live at `https://<service-name>.onrender.com`.
+
+## Run the Web Demo Locally
+
+### Python FastAPI (Full UI + Inference API):
 ```bash
-cd web_demo
+python app.py
+```
+Open `http://localhost:8000` in your browser.
+
+### Node.js Preview:
+```bash
 npm start
 ```
-
-Open `http://localhost:3000` in a browser. The demo includes:
-
-- a real pothole image as the input frame;
-- a muted, autoplaying, looping pothole scan video;
-- a **Detect pothole** interaction with animated progress;
-- a highlighted detection box and the exact review label **“Pothole detected — review required”**;
-- plain-English explanation of what the result means;
-- benefits for faster screening, prioritization, consistent evidence, and maintenance planning; and
-- a clear statement that the output requires human verification.
+Open `http://localhost:3000` in your browser.
 
 ## Repository structure
 
 ```text
 .
-├── README.md
+├── app.py
+├── package.json
+├── Procfile
+├── render.yaml
 ├── requirements.txt
+├── requirements-full-training.txt
+├── README.md
 ├── notebooks/
-│   └── AI_Potholes_Detection.ipynb
+│   ├── ROADGUARD.ipynb
+│   └── fastapi_inference_server.py
 ├── scripts/
 │   ├── prepare_rdd2022.py
 │   └── create_notebook.py

@@ -1,0 +1,14 @@
+__pycache__/
+*.py[cod]
+*$py.class
+*.pt
+*.pth
+*.onnx
+.venv/
+venv/
+env/
+runs/
+data/raw/
+data/processed/
+.DS_Store
+*.log

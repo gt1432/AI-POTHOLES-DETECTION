@@ -25,6 +25,8 @@
           <p class="hero-text">RoadGuard automatically screens road images for visible potholes and turns an unstructured frame into a clear, reviewable detection output.</p>
           <div class="hero-actions">
             <button id="detectButton" class="primary-button" type="button"><span class="button-icon">✦</span> Detect pothole</button>
+            <input type="file" id="imageUpload" accept="image/*" style="display:none;" />
+            <button id="uploadButton" class="secondary-button" type="button"><span class="button-icon">↑</span> Upload road image</button>
             <a class="text-link" href="#how-it-works">How it works <span>↓</span></a>
           </div>
           <div class="hero-note"><span class="note-icon">i</span><span>This is a prototype review output. A human inspector remains in control.</span></div>
@@ -53,10 +55,10 @@
           <div class="image-panel input-panel">
             <div class="panel-header"><span class="panel-kicker"><b class="step-number">01</b> INPUT FRAME</span><span class="panel-state neutral" id="inputState">Waiting</span></div>
             <div class="image-wrap">
-              <img src="/pothole.jpg" alt="Real road surface with a visible pothole" />
+              <img id="inputImg" src="/pothole.jpg" alt="Real road surface with a visible pothole" />
               <div class="image-vignette"></div>
               <div class="corner-mark mark-tl"></div><div class="corner-mark mark-br"></div>
-              <div class="image-tag">ROAD IMAGE / FRAME 001</div>
+              <div class="image-tag" id="inputTag">ROAD IMAGE / FRAME 001</div>
             </div>
             <p class="panel-caption">A real road image enters the inspection workflow.</p>
           </div>
@@ -65,8 +67,8 @@
 
           <div class="image-panel output-panel" id="outputPanel">
             <div class="panel-header"><span class="panel-kicker"><b class="step-number output-step">02</b> AI OUTPUT</span><span class="panel-state" id="outputState">Not analyzed</span></div>
-            <div class="image-wrap output-wrap">
-              <img src="/pothole.jpg" alt="Road image with a highlighted pothole detection region" />
+            <div class="image-wrap output-wrap" id="outputImageWrap">
+              <img id="outputImg" src="/pothole.jpg" alt="Road image with a highlighted pothole detection region" />
               <div class="scan-overlay" id="scanOverlay"><div class="scan-line"></div><div class="scan-copy"><span class="spinner"></span><strong id="scanText">Waiting for input</strong><small id="scanSubtext">Press Detect pothole to begin</small></div></div>
               <div class="detection-box" id="detectionBox"><span class="box-label"><i></i> POTHOLE DETECTED</span><span class="box-corner c1"></span><span class="box-corner c2"></span><span class="box-corner c3"></span><span class="box-corner c4"></span></div>
               <div class="review-badge" id="reviewBadge"><span class="badge-check">✓</span><div><strong>Review required</strong><small>Human verification next</small></div></div>

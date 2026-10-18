@@ -1,0 +1,12 @@
+{
+  "name": "ai-potholes-detection",
+  "version": "1.0.0",
+  "description": "RoadGuard - AI Pothole Detection Web Demo and Inference Service",
+  "main": "web_demo/server.js",
+  "scripts": {
+    "start": "node web_demo/server.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

@@ -86,7 +86,7 @@ def main():
     yaml = out / 'dataset.yaml'
     yaml.write_text(f"path: {out.resolve()}\ntrain: images/train\nval: images/val\nnc: 1\nnames: [pothole]\n")
     print(f'Wrote {yaml}')
-    print('Next: open notebooks/AI_Potholes_Detection.ipynb and run all cells.')
+    print('Next: open notebooks/ROADGUARD.ipynb and run all cells.')
 
 if __name__ == '__main__':
     main()
